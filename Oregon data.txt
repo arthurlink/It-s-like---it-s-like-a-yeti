@@ -1,0 +1,266 @@
+"Reg","Elev","Precip","Temp","LAI","Height","Biomass"
+"1","Eastern Cascades Slopes and Foothills",914,581,7.95,2.1,12,8493
+"2","Eastern Cascades Slopes and Foothills",887,581,7.95,1,33,11269
+"3","Eastern Cascades Slopes and Foothills",894,581,7.95,2.5,12,13905
+"4","Eastern Cascades Slopes and Foothills",917,510,7.8,1.7,12,14782
+"5","Eastern Cascades Slopes and Foothills",899,519,7.83,2.4,14,5777
+"6","Eastern Cascades Slopes and Foothills",900,521,7.84,2,12,4812
+"7","Eastern Cascades Slopes and Foothills",897,521,7.84,3.2,18,6778
+"8","Eastern Cascades Slopes and Foothills",893,521,7.84,2.7,19,6705
+"9","Eastern Cascades Slopes and Foothills",917,521,7.84,0.9,13,1968
+"10","Eastern Cascades Slopes and Foothills",1129,482,7.9,3.2,9,1776
+"11","Eastern Cascades Slopes and Foothills",1233,600,7.16,2.1,14,5518
+"12","Eastern Cascades Slopes and Foothills",969,777,7.01,4.3,23,12650
+"13","Eastern Cascades Slopes and Foothills",918,521,7.84,0,28,1217
+"14","Eastern Cascades Slopes and Foothills",978,749,7.11,3.4,17,14725
+"15","Eastern Cascades Slopes and Foothills",906,563,7.68,2.3,23,4275
+"16","Eastern Cascades Slopes and Foothills",904,521,7.84,2,15,6057
+"17","Eastern Cascades Slopes and Foothills",891,597,7.56,2.8,13,4974
+"18","Eastern Cascades Slopes and Foothills",1114,599,7.47,1.5,11,13477
+"19","Eastern Cascades Slopes and Foothills",899,592,7.57,1.4,12,2588
+"20","Eastern Cascades Slopes and Foothills",1188,482,7.9,1,4,611
+"21","Coast Range",227,2489,10.4,13,7,4760
+"22","Coast Range",320,2572,10.29,9.2,5,3794
+"23","Coast Range",138,2562,10.32,9.4,8,3470
+"24","Coast Range",344,2665,10.16,10.3,14,11030
+"25","Coast Range",319,2665,10.16,10.4,24,20060
+"26","Coast Range",241,2827,9.95,8.6,23,27971
+"27","Coast Range",272,2827,9.95,7.9,34,44965
+"28","Coast Range",281,2827,9.95,7.5,27,55980
+"29","Coast Range",267,2539,10,5.7,34,53769
+"30","Cascades",809,2152,9.22,3.8,7,1802
+"31","Cascades",835,2152,9.22,3.7,9,1467
+"32","Cascades",784,2152,9.22,1.8,7,1509
+"33","Cascades",777,2181,9.31,8.4,17,8632
+"34","Cascades",731,2152,9.22,8.9,18,6343
+"35","Cascades",815,2152,9.22,4.6,18,13600
+"36","Cascades",742,2187,9.56,10,25,16552
+"37","Cascades",896,2187,9.56,8,25,38446
+"38","Cascades",879,2152,9.22,8.5,28,31852
+"39","Cascades",822,2181,9.31,7,17,43483
+"40","Cascades",772,2152,9.22,5.6,20,36696
+"41","Cascades",853,2152,9.22,6.5,16,46826
+"42","Eastern Cascades Slopes and Foothills",1188,482,7.9,0.9,4,776
+"43","Eastern Cascades Slopes and Foothills",941,521,7.84,0.1,2,225
+"44","Eastern Cascades Slopes and Foothills",1138,542,7.68,0.3,4,257
+"45","Eastern Cascades Slopes and Foothills",1129,482,7.9,1.5,8,3424
+"46","Eastern Cascades Slopes and Foothills",1177,498,7.8,1.5,15,5217
+"47","Eastern Cascades Slopes and Foothills",1254,600,7.16,3,14,6803
+"48","Eastern Cascades Slopes and Foothills",925,521,7.84,2.2,19,10798
+"49","Eastern Cascades Slopes and Foothills",920,521,7.84,2.5,10,5424
+"50","Eastern Cascades Slopes and Foothills",891,597,7.56,3.5,14,14188
+"51","Eastern Cascades Slopes and Foothills",914,581,7.95,2,13,12218
+"52","Eastern Cascades Slopes and Foothills",907,683,7.32,1.8,33,12304
+"53","Eastern Cascades Slopes and Foothills",1148,599,7.47,2.1,9,15605
+"54","Cascades",1228,2607,6.66,0.4,1,440
+"55","Cascades",601,2507,7.5,9.4,16,8375
+"56","Cascades",957,2607,6.66,4,15,7063
+"57","Cascades",632,2393,8.61,10,19,11301
+"58","Cascades",1024,2698,7.43,8.8,17,34309
+"59","Cascades",1200,2839,7.68,8,10,44380
+"60","Cascades",1426,1951,7.36,0,3,446
+"61","Cascades",889,1856,8.07,6.6,9,2577
+"62","Cascades",1476,1950,7.24,6.8,7,7633
+"63","Cascades",831,1850,8.18,7.9,19,16111
+"64","Cascades",1303,1951,7.36,7.6,21,21034
+"65","Cascades",1386,1938,7.35,-9999,13,-9999
+"66","Cascades",1321,2534,8,0.4,2,283
+"67","Cascades",1032,2484,8.51,-9999,9,-9999
+"68","Cascades",773,2484,8.51,-9999,21,-9999
+"69","Cascades",1039,2501,7.84,-9999,12,-9999
+"70","Cascades",984,2484,8.51,7.5,12,23402
+"71","Cascades",1229,2102,6.64,0.1,1,338
+"72","Cascades",1163,2102,6.64,-9999,2,170
+"73","Cascades",1094,2102,6.64,12.7,18,12067
+"74","Cascades",1192,2117,6.58,4.8,17,30500
+"75","Cascades",1076,2102,6.64,5.2,17,27159
+"76","Cascades",1093,2312,9.31,-9999,-9999,-9999
+"77","Cascades",494,2222,9.49,5.3,13,4956
+"78","Cascades",854,2358,9.2,6.6,17,9585
+"79","Cascades",569,1683,10.58,10.2,19,15907
+"80","Cascades",470,1938,9.91,-9999,23,-9999
+"81","Cascades",705,2128,9.54,7.7,24,24072
+"82","Coast Range",473,2236,10.95,9.6,9,2481
+"83","Coast Range",566,2404,10.42,9.9,19,9760
+"84","Coast Range",338,2342,11.04,12,21,11115
+"85","Coast Range",640,2286,10.59,10.6,32,23717
+"86","Coast Range",362,2263,10.67,9.2,54,32982
+"87","Cascades",660,1416,10.4,1,-9999,-9999
+"88","Cascades",476,1231,11.08,9.8,15,10757
+"89","Cascades",586,1355,10.89,9.4,15,8613
+"90","Cascades",824,1460,10.18,11.2,25,16422
+"91","Cascades",868,1358,10.86,11.1,42,46018
+"92","Cascades",716,1348,10.93,9,24,65151
+"93","Cascades",1412,1722,6.6,0.7,2,314
+"94","Cascades",1356,1691,7.18,0.7,6,294
+"95","Cascades",1230,1705,6.4,8.4,13,6246
+"96","Cascades",1488,1876,4.19,-9999,11,-9999
+"97","Cascades",1366,1636,7.87,9,26,26588
+"98","Cascades",1460,1876,4.19,7.7,27,40322
+"99","Cascades",1050,1021,9.23,0,2,1698
+"100","Cascades",952,984,9.46,-9999,12,-9999
+"101","Cascades",856,980,9.64,5,17,9541
+"102","Cascades",1046,1068,9.16,10.6,15,17242
+"103","Cascades",963,975,9.48,-9999,26,-9999
+"104","Cascades",997,1043,9.39,10,21,18445
+"105","Klamath Mountains/California High North Coast Range",737,829,11.51,1.5,3,2165
+"106","Klamath Mountains/California High North Coast Range",951,821,11.57,5.5,11,6324
+"107","Klamath Mountains/California High North Coast Range",771,842,11.41,6.1,10,9195
+"108","Klamath Mountains/California High North Coast Range",811,803,11.89,5.9,15,22570
+"109","Klamath Mountains/California High North Coast Range",1026,821,11.57,7.9,12,16165
+"110","Klamath Mountains/California High North Coast Range",937,821,11.57,9.6,18,39649
+"111","Eastern Cascades Slopes and Foothills",975,864,7.02,8,-9999,12858
+"112","Blue Mountains",983,349,8.02,1.2,-9999,53
+"113","Eastern Cascades Slopes and Foothills",914,581,7.95,2.9,-9999,20643
+"114","Blue Mountains",1449,490,6.89,3.7,11,2727
+"115","Blue Mountains",1428,429,7.2,5,13,5608
+"116","Blue Mountains",1400,414,7.69,2,7,789
+"117","Blue Mountains",1346,478,7.42,4.4,19,5670
+"118","Blue Mountains",1382,469,7.42,7.9,16,4812
+"119","Blue Mountains",1415,501,7.33,4.5,10,1865
+"120","Blue Mountains",1452,575,7.02,11.9,14,9631
+"121","Blue Mountains",1360,538,7.14,4.6,13,6567
+"122","Blue Mountains",1602,627,4.78,3.5,20,8018
+"123","Blue Mountains",1653,627,4.78,3,13,3669
+"124","Blue Mountains",1678,584,4.91,10.3,14,7952
+"125","Blue Mountains",1650,647,5.02,9.9,11,3025
+"126","Blue Mountains",1298,510,6.41,8.6,16,8615
+"127","Blue Mountains",1391,584,6.3,8.1,18,5619
+"128","Blue Mountains",1538,771,7.27,4.5,23,5373
+"129","Blue Mountains",1324,640,8.04,5.6,28,30379
+"130","Blue Mountains",1508,957,6.38,10.9,26,18810
+"131","Blue Mountains",1571,945,6.39,3.5,11,1702
+"132","Blue Mountains",1498,957,6.38,6.3,17,4664
+"133","Blue Mountains",1677,1147,5,0.7,23,1803
+"134","Blue Mountains",1683,1147,5,5,18,5071
+"135","Blue Mountains",1502,1115,5.2,3.7,15,12090
+"136","Blue Mountains",1397,1115,5.2,6.8,20,16147
+"137","Blue Mountains",1341,851,6.74,11.6,22,13408
+"138","Klamath Mountains/California High North Coast Range",1381,1201,10.56,3.2,42,7088
+"139","Klamath Mountains/California High North Coast Range",1220,1198,10.6,3.3,15,22627
+"140","Klamath Mountains/California High North Coast Range",1188,1160,11.1,2.9,24,13713
+"141","Klamath Mountains/California High North Coast Range",1153,1160,11.1,2.8,11,20339
+"142","Klamath Mountains/California High North Coast Range",1332,1119,10.95,3,16,5797
+"143","Klamath Mountains/California High North Coast Range",1196,1096,10.95,5.8,21,15927
+"144","Klamath Mountains/California High North Coast Range",1164,1233,10.97,7.6,16,11362
+"145","Klamath Mountains/California High North Coast Range",1322,1119,10.95,4.1,13,12081
+"146","Klamath Mountains/California High North Coast Range",1332,1174,10.76,1.8,12,3982
+"147","Klamath Mountains/California High North Coast Range",1339,1174,10.76,1,12,1504
+"148","Sierra Nevada",1885,689,8.7,12.5,17,1589
+"149","Sierra Nevada",2005,787,8.96,5.2,18,12967
+"150","Sierra Nevada",1877,689,8.7,9.8,23,12841
+"151","Sierra Nevada",1746,689,8.7,6.6,19,5618
+"152","Sierra Nevada",1768,689,8.7,3.3,23,8575
+"153","Cascades",1727,608,6.07,10.8,15,5374
+"154","Cascades",1727,566,6.03,8,13,7019
+"155","Cascades",1770,570,6.01,4.7,13,9911
+"156","Cascades",1909,595,5.93,6.9,19,3678
+"157","Cascades",2018,617,5.88,3.4,12,7274
+"158","Sierra Nevada",2584,1028,5.02,10.3,10,8003
+"159","Sierra Nevada",2435,1049,5.64,7.8,17,6646
+"160","Sierra Nevada",2468,1009,5.79,10.7,10,4721
+"161","Sierra Nevada",2478,1028,5.02,10.1,10,9041
+"162","Sierra Nevada",2047,1234,5.54,14.7,26,17773
+"163","Sierra Nevada",2238,1358,7.43,14.4,18,15369
+"164","Sierra Nevada",1884,1233,8.38,12,27,15651
+"165","Sierra Nevada",2488,459,5.28,11.3,12,6736
+"166","Sierra Nevada",2707,595,4.56,11,14,8151
+"167","Sierra Nevada",2486,518,4.91,5.3,10,5568
+"168","Sierra Nevada",2722,1316,2.43,13.5,-9999,30233
+"169","Sierra Nevada",2758,1316,2.43,4,15,14046
+"170","Sierra Nevada",2751,1316,2.43,3,14,6820
+"171","Sierra Nevada",2289,1436,7.03,9.9,18,39419
+"172","Sierra Nevada",2651,1038,3.39,12.6,13,6107
+"173","Sierra Nevada",1235,1445,13.53,5.4,23,5208
+"174","Sierra Nevada",1297,1487,12.86,5.7,17,6179
+"175","Sierra Nevada",1297,1487,12.86,3.5,17,7395
+"176","Sierra Nevada",1381,1503,12.77,3.5,14,4684
+"177","Sierra Nevada",1261,1467,13.24,0.7,18,2118
+"178","Sierra Nevada",1366,1503,12.77,1.6,18,2957
+"179","Sierra Nevada",1257,1445,13.53,1.1,14,1337
+"180","Sierra Nevada",1233,1467,13.24,1.3,18,3272
+"181","Sierra Nevada",1176,1445,13.53,0.7,10,5432
+"182","Sierra Nevada",1182,1445,13.53,0.6,16,2116
+"183","Sierra Nevada",1223,1445,13.53,0,16,5330
+"184","Sierra Nevada",1290,1446,13.51,2.1,20,4287
+"185","Sierra Nevada",1264,1433,13.49,2,21,3933
+"186","Sierra Nevada",1295,1433,13.49,2.6,19,6192
+"187","Cascades",1497,1969,5.76,0.1,12,4569
+"188","Cascades",1287,1577,6.3,0.8,21,16817
+"189","Cascades",1296,1577,6.3,0.8,11,3278
+"190","Cascades",1369,1259,6.65,0,10,3302
+"191","Eastern Cascades Slopes and Foothills",979,1128,7.05,2.3,20,16883
+"192","Eastern Cascades Slopes and Foothills",990,840,7.21,3.3,21,12424
+"193","Eastern Cascades Slopes and Foothills",1122,1414,7.18,1.5,20,12613
+"194","Eastern Cascades Slopes and Foothills",930,596,8.27,0,12,4375
+"195","Cascades",928,595,8.55,0.6,11,2774
+"196","Eastern Cascades Slopes and Foothills",1016,527,7.95,0,8,1422
+"197","Eastern Cascades Slopes and Foothills",944,527,7.95,1.2,13,3053
+"198","Eastern Cascades Slopes and Foothills",973,527,7.95,1.5,17,7353
+"199","Eastern Cascades Slopes and Foothills",927,668,7.3,2.2,20,12367
+"200","Eastern Cascades Slopes and Foothills",951,597,8.09,0,5,121
+"201","Eastern Cascades Slopes and Foothills",961,668,7.3,0,16,3885
+"202","Eastern Cascades Slopes and Foothills",1085,752,7.52,0.9,12,4875
+"203","Eastern Cascades Slopes and Foothills",1162,937,7.8,0,9,1810
+"204","Cascades",1229,937,7.8,0,15,4657
+"205","Eastern Cascades Slopes and Foothills",1446,994,7.71,0,9,2215
+"206","Cascades",1218,1505,6.72,0.8,16,9228
+"207","Cascades",1083,1128,7.05,0.8,10,2538
+"208","Cascades",1180,1128,7.05,1,18,7393
+"209","Cascades",1151,777,7.01,1.1,14,6975
+"210","Cascades",1278,1731,6.36,0,15,3944
+"211","Eastern Cascades Slopes and Foothills",1077,610,8.16,2.4,14,8621
+"212","Eastern Cascades Slopes and Foothills",1087,474,8.73,1.6,19,12100
+"213","Eastern Cascades Slopes and Foothills",1180,864,7.59,1.4,14,8179
+"214","Eastern Cascades Slopes and Foothills",1135,565,8.56,1.4,11,5792
+"215","Eastern Cascades Slopes and Foothills",1077,463,8.75,0.9,14,4543
+"216","Eastern Cascades Slopes and Foothills",1052,610,8.16,1,13,3853
+"217","Eastern Cascades Slopes and Foothills",1060,545,8.62,1,13,4011
+"218","Eastern Cascades Slopes and Foothills",931,597,8.09,0,22,8797
+"219","Eastern Cascades Slopes and Foothills",1091,565,8.56,0.2,6,228
+"220","Eastern Cascades Slopes and Foothills",1072,565,8.56,0,7,157
+"221","Eastern Cascades Slopes and Foothills",1041,729,8.03,0.8,14,2769
+"222","Eastern Cascades Slopes and Foothills",1028,564,8.57,0.6,20,3244
+"223","Eastern Cascades Slopes and Foothills",1095,564,8.57,1.2,19,8539
+"224","Eastern Cascades Slopes and Foothills",978,564,8.57,0,11,2316
+"225","Eastern Cascades Slopes and Foothills",1096,463,8.75,0.3,10,1430
+"226","Eastern Cascades Slopes and Foothills",909,477,9.09,0,7,523
+"227","Eastern Cascades Slopes and Foothills",1100,463,8.75,0.2,7,686
+"228","Cascades",1246,1731,6.36,0.2,10,1742
+"229","Eastern Cascades Slopes and Foothills",920,656,7.44,2.1,14,6324
+"230","Eastern Cascades Slopes and Foothills",938,673,7.4,0.7,23,1297
+"231","Cascades",1060,1281,7.1,1.5,14,8000
+"232","Eastern Cascades Slopes and Foothills",973,864,7.02,1.1,19,9568
+"233","Eastern Cascades Slopes and Foothills",1100,777,7.01,1.5,24,15189
+"234","Cascades",1129,1189,6.98,1.3,8,1735
+"235","Eastern Cascades Slopes and Foothills",917,510,7.8,-9999,19,9916
+"236","Eastern Cascades Slopes and Foothills",920,521,7.84,-9999,14,7159
+"237","Eastern Cascades Slopes and Foothills",893,521,7.84,-9999,29,8824
+"238","Eastern Cascades Slopes and Foothills",914,581,7.95,-9999,19,7100
+"239","Eastern Cascades Slopes and Foothills",1138,542,7.68,-9999,6,1176
+"240","Eastern Cascades Slopes and Foothills",1254,600,7.16,-9999,16,6239
+"241","Eastern Cascades Slopes and Foothills",1148,599,7.47,-9999,22,12034
+"242","Eastern Cascades Slopes and Foothills",969,777,7.01,-9999,23,16365
+"243","Cascades",1562,632,7.42,-9999,16,11006
+"244","Eastern Cascades Slopes and Foothills",1384,717,7.11,-9999,8,1132
+"245","Eastern Cascades Slopes and Foothills",1280,546,8.05,-9999,11,1127
+"246","Eastern Cascades Slopes and Foothills",1111,463,8.75,-9999,12,5700
+"247","Eastern Cascades Slopes and Foothills",1033,464,8.64,-9999,12,5190
+"248","Eastern Cascades Slopes and Foothills",1105,463,8.75,-9999,7,895
+"249","Eastern Cascades Slopes and Foothills",870,572,8.09,-9999,15,7845
+"250","Eastern Cascades Slopes and Foothills",970,673,7.4,-9999,24,19366
+"251","Eastern Cascades Slopes and Foothills",1567,646,6.92,5.2,13,8826
+"252","Eastern Cascades Slopes and Foothills",1509,843,6.03,6.2,17,21484
+"253","Eastern Cascades Slopes and Foothills",1429,1365,6.44,5.4,13,11225
+"254","Eastern Cascades Slopes and Foothills",1210,841,6.81,2.7,19,10404
+"255","Cascades",1278,1346,6.48,4.2,23,16682
+"256","Eastern Cascades Slopes and Foothills",1121,624,7.1,1.4,26,16184
+"257","Eastern Cascades Slopes and Foothills",979,425,7.87,1.6,18,7122
+"258","Eastern Cascades Slopes and Foothills",1323,757,6.21,2.6,20,9834
+"259","Eastern Cascades Slopes and Foothills",1000,443,7.78,1.2,7,713
+"260","Eastern Cascades Slopes and Foothills",1254,600,7.16,2,16,8575
+"261","Blue Mountains",1009,290,8.45,0.2,7,1915
+"262","Blue Mountains",955,328,8.18,0.4,6,2928
+"263","Blue Mountains",930,248,8.79,0.1,8,2614
+"264","Blue Mountains",910,257,9,0.3,4,212
+"265","Blue Mountains",976,290,8.67,0.4,7,2525
