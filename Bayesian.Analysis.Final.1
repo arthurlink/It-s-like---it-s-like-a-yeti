@@ -1,0 +1,256 @@
+#####Final Project-Artemis 
+################################################################################
+source('https://raw.githubusercontent.com/arthurlink/It-s-like---it-s-like-a-yeti/master/Library.r')
+#taken care of by equation:stems.I$dm=exp(-2.02043+1.65725*log(stems.I$Diameter))
+#######################################Load Seeds from both Sarah and Alyson plots
+Seed.c=read.csv('https://raw.githubusercontent.com/arthurlink/It-s-like---it-s-like-a-yeti/master/Alyson%20Seedlings.csv')
+Seed.c=Seed.c[-c(73,178.179),]
+Seed.c=filter(Seed.c,Heights>0)
+summary(Seed.c)
+Seed.c1=summaryBy(Heights~Trap.ID,data=Seed.c,FUN=c(length))
+Seed.c1$Heights.length=Seed.c1$Heights.length/4
+y1=gsub('......C','C',Seed.c1$Trap.ID)
+y2=gsub('......T','T',y1)
+y3=gsub('.C','T',y2)
+y4=gsub('.T','T',y3)
+Seed.c1$P.T=y4
+colnames(Seed.c1)=c('Plot.ID','Seedling.D','P.T')
+###############################################
+Seed.d=read.csv('https://raw.githubusercontent.com/arthurlink/It-s-like---it-s-like-a-yeti/master/Seedling.Sarah.csv')
+Seed.d=Seed.d[-c(14),]
+Seed.d=filter(Seed.d,Heights>0)
+summary(Seed.d)
+Seed.d1=summaryBy(Heights~Plot.ID+Tree.ID,data=Seed.d,FUN=c(length))
+Seed.d1$Heights.length=Seed.d1$Heights.length/2
+Seed.d1=summaryBy(Heights.length~Plot.ID,data=Seed.d1,FUN=c(sum))
+y1=gsub('....C','C',Seed.d1$Plot.ID)
+y2=gsub('....T','T',y1)
+y3=gsub('...C','C',y2)
+Seed.d1$P.T=y3
+colnames(Seed.d1)=c('Plot.ID','Seedling.D','P.T')
+######################Completed seed count
+Seedlings=rbind(Seed.c1,Seed.d1)
+hist(Seedlings$Seedling.D)
+plot(Seedling.D~as.factor(P.T), data=Seedlings)#without counting zeros
+######################Stem Diameter (Biomass) and count in plots
+###load stem
+B.S.IR=read.csv("https://raw.githubusercontent.com/arthurlink/It-s-like---it-s-like-a-yeti/master/Barberis%20Stems%20IR.csv")
+B.S.EH=read.csv("https://raw.githubusercontent.com/arthurlink/It-s-like---it-s-like-a-yeti/master/Berberis%20Stems%20for%20Fungi%20EH.csv")
+B.S.EH=filter(B.S.EH,Diameter!=0)#rid of zero
+B.Stem=rbind(B.S.IR,B.S.EH)#All of Sarah's
+B.S.Pitfall=read.csv('https://github.com/arthurlink/It-s-like---it-s-like-a-yeti/raw/master/Berberis%20Stems_Pitfall%20traps.csv')#Alyson's plots
+B.S.Pitfall=filter(B.S.Pitfall,Diameter!=0)#Alysonnn!
+####################
+### BIOMASS and COUNT
+#Sarah's plots#########################
+B.Stem1=summaryBy(Diameter~Plot.ID+Tree.ID,data=B.Stem,FUN=c(length))
+B.Stem1$Diameter.length=B.Stem1$Diameter.length/2
+B.Stem1=summaryBy(Diameter.length~Plot.ID,data=B.Stem1,FUN=c(sum))
+y1=gsub('.......C','C',B.Stem1$Plot.ID)
+y2=gsub('.......T','T',y1)
+y3=gsub('....C','C',y2)
+y4=gsub('....T','T',y3)
+B.Stem1$P.T=y4#Stem Count
+############
+B.Stem2=summaryBy(Diameter~Plot.ID+Tree.ID,data=B.Stem,FUN=c(sum))
+B.Stem2$Diameter.sum=exp(-2.02043+1.65725*log(B.Stem2$Diameter))
+B.Stem2$Diameter.sum=B.Stem2$Diameter.sum/2
+B.Stem2=summaryBy(Diameter.sum~Plot.ID,data=B.Stem2,FUN=c(sum))
+y1=gsub('.......C','C',B.Stem2$Plot.ID)
+y2=gsub('.......T','T',y1)
+y3=gsub('....C','C',y2)
+y4=gsub('....T','T',y3)
+B.Stem2$P.T=y4#Dens
+StemC=cbind(B.Stem1,B.Stem2$Diameter.sum.sum)#############SARAHS B.B data
+colnames(StemC)=c('Plot.ID','Stem.N','P.T','Stem.D')
+hist(StemC$Stem.N)
+hist(StemC$Stem.D)
+##################ALYSON!!!
+summary(B.S.Pitfall$Trap.ID)
+B.Stem3=summaryBy(Diameter~Trap.ID,data=B.S.Pitfall,FUN=c(length))
+B.Stem3$Diameter.length=B.Stem3$Diameter.length/4###############Count
+y1=gsub('......C','C',B.Stem3$Trap.ID)
+y2=gsub('......T','T',y1)
+y3=gsub('.C','T',y2)
+y4=gsub('.T','T',y3)
+B.Stem3$P.T=y4#Stem count###################
+###########
+B.Stem4=summaryBy(Diameter~Trap.ID,data=B.S.Pitfall,FUN=c(sum))
+B.Stem4$Diameter.sum=exp(-2.02043+1.65725*log(B.Stem4$Diameter))
+B.Stem4$Diameter.sum=B.Stem4$Diameter.sum/4
+B.Stem4=summaryBy(Diameter.sum~Trap.ID,data=B.Stem4,FUN=c(sum))
+y1=gsub('......C','C',B.Stem4$Trap.ID)
+y2=gsub('......T','T',y1)
+y3=gsub('.C','T',y2)
+y4=gsub('.T','T',y3)
+B.Stem4$P.T=y4#Dens
+StemD=cbind(B.Stem3,B.Stem4$Diameter.sum.sum)
+colnames(StemD)=c('Plot.ID','Stem.N','P.T','Stem.D')
+Barberry=rbind(StemC,StemD)
+##############################################Finished B.B##################3
+#Combining Frames!!!! FAWKKK YEAH!
+Finished=merge(Seedlings,Barberry,by=c('Plot.ID','P.T'),all=T)
+Finished[is.na(Finished)]=0
+Finished$P.T=as.factor(Finished$P.T)
+hist(Finished$Seedling.D)
+hist(Finished$Stem.N)
+hist(Finished$Stem.D)
+
+#BAYESIAN Analysis
+Finished$CTn=0; Finished$CTn[Finished$P.T=='T']=1
+###############################################First MODEL!!!
+CT.mod <- function() {
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i], tau)
+    mu[i] <- alpha + beta1 * CTn[i]
+  }
+  alpha ~ dnorm(0, .01)
+  beta1 ~ dunif(-100, 100)
+  tau ~ dgamma(.01, .01)
+}
+
+Seedling.D <- Finished$Seedling.D
+CTn <- Finished$CTn
+N <- nrow(Finished)
+
+sim.dat.jags <- as.list(Finished[,c(3,6)])
+sim.dat.jags$N <- nrow(Finished)
+
+bayes.mod.params <- c("alpha", "beta1")
+
+bayes.mod.inits <- function(){
+  list("alpha" = rnorm(1), "beta1" = rnorm(1))
+}
+
+set.seed(123)
+library(rjags)
+library(R2jags)
+
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = CT.mod)
+
+print(bayes.mod.fit)
+
+plot(bayes.mod.fit)
+traceplot(bayes.mod.fit)
+
+bayes.mod.fit.mcmc <- as.mcmc(bayes.mod.fit)
+summary(bayes.mod.fit.mcmc)
+library(coda);library(lattice)
+xyplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc, layout=c(2,2), aspect="fill")
+
+boxplot(Seedling.D~P.T,data=Finished)
+
+#############################Stem count
+BCn.mod <- function() {
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i], tau)
+    mu[i] <- alpha + beta1^2 * Stem.N[i]
+  }
+  alpha ~ dnorm(0, .01)
+  beta1 ~ dunif(-100, 100)
+  tau ~ dgamma(.01, .01)
+}
+
+Seedling.D <- Finished$Seedling.D
+Stem.N <- Finished$Stem.N
+N <- nrow(Finished)
+
+sim.dat.jags <- as.list(Finished[,c(4,3)])
+sim.dat.jags$N <- nrow(Finished)
+
+bayes.mod.params <- c("alpha", "beta1")
+
+bayes.mod.inits <- function(){
+  list("alpha" = rnorm(1), "beta1" = rnorm(1))
+}
+
+set.seed(123)
+
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BCn.mod)
+
+print(bayes.mod.fit)
+
+plot(bayes.mod.fit)
+traceplot(bayes.mod.fit)
+
+bayes.mod.fit.mcmc <- as.mcmc(bayes.mod.fit)
+summary(bayes.mod.fit.mcmc)
+xyplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc, layout=c(2,2), aspect="fill")
+
+###################density
+BD.mod <- function() {
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i], tau)
+    mu[i] <- alpha + beta1 * Stem.D[i]
+  }
+  alpha ~ dnorm(0, .01)
+  beta1 ~ dunif(-100, 100)
+  tau ~ dgamma(.01, .01)
+}
+
+Seedling.D<- Finished$Seedling.D
+Stem.D <- Finished$Stem.D
+N <- nrow(Finished)
+
+sim.dat.jags <- as.list(Finished[,c(5,3)])
+sim.dat.jags$N <- nrow(Finished)
+
+bayes.mod.params <- c("alpha", "beta1")
+
+bayes.mod.inits <- function(){
+  list("alpha" = rnorm(1), "beta1" = rnorm(1))
+}
+
+set.seed(123)
+
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BD.mod)
+print(bayes.mod.fit)
+
+plot(bayes.mod.fit)
+traceplot(bayes.mod.fit)
+
+bayes.mod.fit.mcmc <- as.mcmc(bayes.mod.fit)
+summary(bayes.mod.fit.mcmc)
+
+xyplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc, layout=c(2,2), aspect="fill")
+#########################################
+mod.d=lm(Stem.D~Seedling.D,data=Finished)
+summary(mod.d)
+plot(mod.d)
+library(Hmisc)
+par(mfrow=c(1,3),mar=c(6,5,2,.5))
+plot(Seedling.D~P.T,Finished,
+     xlab='Plot Type',
+     ylab=expression("Seedling Density"~~'(Plot size:'~'1'~m^2~')'),
+     #method='jitter',
+     pch=16,
+     vertical=T)
+errbar(1,4.456,4.456+.62,4.456-.62, add=T, pch=16, cap=.1,col='red',lwd=.2,bg='black')
+errbar(2,1.297,1.297+.78,1.297-.78, add=T, pch=16, cap=.1,col='red',lwd=.2,bg='black')
+
+plot(Seedling.D~Stem.N,Finished,
+     xlab=expression("Stem Count"~~'(1'~m^2~'Plot)'),
+     ylab='Seedling Density')
+abline(2.425,-.07)
+abline(2.85369,-.07,col='red')
+abline(1.99631,-.07,col='red')
+
+plot(Seedling.D~Stem.D,Finished,
+     xlab=expression("Stem Density"~~'(1'~m^2~'Plot)'),
+     ylab='Seedling Density')
+abline(2.876,-.001)
+abline(2.876+.4604,-.001,col='red')
+abline(2.876-.4604,-.001,col='red')
+#########################################
