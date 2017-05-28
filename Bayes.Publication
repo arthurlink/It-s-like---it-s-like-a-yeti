@@ -1,0 +1,442 @@
+#Art Link Bayes Final
+#---------------------------------------------------------------------------------------#
+
+#Load all required packages and introduce data
+
+library(coda);library(tidyr);library(lattice);library(rjags);library(R2jags);library(cowplot);library(dunn.test);library(gridExtra)
+Finished=read.delim("https://github.com/arthurlink/It-s-like---it-s-like-a-yeti/raw/master/Seedling.perplot.stem.dens.txt")
+Finished.s=read.delim("https://github.com/arthurlink/It-s-like---it-s-like-a-yeti/raw/master/F.S.txt")
+
+#---------------------Predictive drymass data---------------------
+
+# 45 stem sections that were 10 cm long were collected. They had various diameters ranging from 1-25, one was previously elimited (outlier)
+
+D=read.delim("https://github.com/arthurlink/It-s-like---it-s-like-a-yeti/raw/master/Predictive%20Data%20for%20Barberry%20diameter%20and%20mass.txt")
+plot(D)#transformation required of d.mass and diameter
+mod.lm=lm(log(D$Dry.mass)~log(D$Diameter))
+par(mfrow=c(2,2))
+plot(mod.lm)#assumptions met
+graphics.off()
+summary(mod.lm)#significant, (+)relation between dry.mass and diameter, (r^2=.94)
+plot(log(D$Dry.mass)~log(D$Diameter));abline(-2.02043,1.65725)
+
+
+#--------------------Graph of predictability-------------------------------------
+
+p.1=ggplot(data=D, aes(x=log(Diameter),y=log(Dry.mass)))+
+  geom_point(lwd=1.2)+
+  geom_abline(intercept = -2.02043,slope = 1.65725)+
+  labs(x='log - Stem Diameter (mm)',y=expression('log - Stem Dry Mass (g)'))+
+  annotate("text", x = 2, y = -1.75,
+           label = "paste(italic(R) ^ 2, \" = .93\")", parse = T)+
+  annotate("text",x=2,y=-1.35,
+           label= "Pred. dry mass= \n exp (-2.02043+1.65725*log (Diameter)),")+
+  theme(text = element_text(size=16))+
+  theme_classic()
+
+#x11(5,7)
+p.1
+#ggsave("Final.PRed..jpeg",dpi = 2000)
+
+#--------------------Frequentist, Data on plot being true "control" or "treatment"------------#
+par(mfrow=c(2,1))
+hist(Finished$Stem.N);hist(Finished$Stem.D) # both dep.var. are positively skewed...non-parametric or transformation
+graphics.off()
+# Decided to do non-parametric (Mann-Whitney-Wilcoxon test)
+# Null: distributions of both factors are equal
+wilcox.test(Stem.N~P.T, data=Finished) #significance p<.001, reject null.
+dunn.test(Finished$Stem.N,Finished$P.T,method = "bonferroni")
+wilcox.test(Stem.D~P.T, data=Finished) #significance p<.001, reject null.
+dunn.test(Finished$Stem.D,Finished$P.T,method = "bonferroni")# i think this is the posthoc, either way, treatment has more
+
+# Stems=Graphs
+## Stem number
+y1=ggplot(data=Finished, aes(x=P.T,y=Stem.D,fill=P.T))+
+  geom_boxplot(lwd=0.8,notch = T)+
+  scale_y_log10(limits=c(1,3200),breaks=c(0,5,25,100,400,3200))+
+  scale_fill_manual(values=c('gray70','black'))+
+  labs(x='Plot Type',y=expression('log - Barberry Dry Mass per m'^2))+
+  scale_x_discrete(labels=c('Control','Treatment'))+
+  theme(text = element_text(size=16))+
+  theme_classic()+
+  guides(fill=F)
+
+## Stem density
+y2=ggplot(data=Finished, aes(x=P.T,y=Stem.N,fill=P.T))+
+  geom_boxplot(lwd=0.8,notch = T)+
+  scale_y_log10(limits=c(1,90),breaks=c(1,5,15,40,90))+
+  scale_fill_manual(values=c('gray70','black'))+
+  labs(x='',y=expression('log - Barberry Stem Counts per m'^2))+
+  scale_x_discrete(labels=c('Control','Treatment'))+
+  theme(text = element_text(size=16))+
+  theme_classic()+
+  guides(fill=F)
+
+sinrow=plot_grid(y2,y1,
+                 align='v',
+                 nrow=2)
+
+Final=plot_grid(sinrow,ncol=1,rel_heights = c(1,.1))
+
+#x11(5,7)
+Final
+#ggsave("Final.Seedling.jpeg",dpi = 2000)
+
+#---------------------------First model:C/T seedlings------------------------------------
+# Model was ran as a normal distribution
+# Data did not follow assumptions
+# All other distribution types/transformations would have limited or greatly altered the data
+# I.E. gamma cannot work due to zeros. This really did not fit an exponential from the hypothesis:
+# Research question: Seedling predictions of C vs. T
+
+CT.mod <- function() {
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i], tau)
+    mu[i] <- alpha + beta1 * CTn[i]
+  }
+  alpha ~ dnorm(0.1, 0.1)
+  beta1 ~ dunif(-100, 100)
+  tau ~ dgamma(.01, .01)
+}
+
+Seedling.D <- Finished$Seedling.D
+CTn <- Finished$CTn
+N <- nrow(Finished)
+
+sim.dat.jags <- as.list(Finished[,c(3,6)])
+sim.dat.jags$N <- nrow(Finished)
+
+bayes.mod.params <- c("alpha", "beta1")
+
+bayes.mod.inits <- function(){
+  list("alpha" = rnorm(1), "beta1" = rnorm(1))
+}
+
+set.seed(123)
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = CT.mod)
+
+print(bayes.mod.fit)
+bayes.mod.fit.mcmc <- as.mcmc(bayes.mod.fit)
+summary(bayes.mod.fit.mcmc)
+xyplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc)
+
+#---------------------------------------Plot for Seedlings~Plots-----------------------------------
+par(mar=c(5,5,1,1))
+# Can only do base-r because of errbar limitations for ggplot
+Finished$P.T=ifelse(Finished$P.T=="C","Control","Treatment")
+Finished$P.T=as.factor(Finished$P.T)
+library(Hmisc)
+x11(5,7)
+plot(Seedling.D~P.T,Finished,
+     xlab='Plot Type',
+     ylab=expression("Seedling Density"~~'(Plot size:'~'1'~m^2~')'),
+     pch=16,
+     vertical=T
+     )
+errbar(1,4.145,5.196,3.107, add=T,lwd=3,errbar.col='gray37', pch=1,cex=1.5, cap=.1,col='black')
+errbar(2,.753,2.169,0, add=T, pch=1,cex=1.5, cap=.1,col='black',lwd=3,errbar.col = 'gray37')
+legend(1.75,20, c("Pred. Mean","97.5% C.I."), pch=c(1,NA),lty=c(NA,1), lwd=c(NA,3),col=c("black","gray37"),pt.cex = 1.5)
+
+#---------------------------------------Second Model: Stem.Seedling.Model---------------------------
+# Also ran this one as normal because of the issue with producing viable data, given the model
+# JAGS code for exponential-like model
+Stem.N<- Finished$Stem.N
+
+BCn.mod<- function() {
+  # Likelihood
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i],tau)  
+    mu[i] <- alpha*exp(-beta1*Stem.N[i])
+  }
+  # Prior distributions
+  alpha ~ dunif(0,10)
+  beta1 ~ dunif(0,15)
+  tau~dgamma(.01,.01)
+}
+
+sim.dat.jags <- as.list(Finished[,c(4,3)])
+sim.dat.jags$N <- nrow(Finished)
+bayes.mod.inits <- function(){
+  list("alpha" = rexp(1), "beta1" = rexp(1))}
+
+bayes.mod.params <- c("alpha", "beta1")
+
+set.seed(123)
+
+bayes.mod.fit <- jags(sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BCn.mod)
+
+print(bayes.mod.fit)
+
+bayes.mod.fit.mcmc <- as.mcmc(bayes.mod.fit)
+summary(bayes.mod.fit.mcmc)
+
+xyplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc)
+densityplot(bayes.mod.fit.mcmc, layout=c(2,2), aspect="fill")
+
+jags.mcmc=as.mcmc(bayes.mod.fit)
+plot(jags.mcmc)
+summary(jags.mcmc)
+HPDinterval(jags.mcmc)
+
+
+#---------------------------------------Plot for Seedling~Stem.N------------------------
+
+plot(Seedling.D~Stem.N,Finished, col=193,
+     xlab=expression("Barberry Stem Count"),
+     ylab=expression("Native Seedling Density"~~'(1'~m^2~'Plots)'),
+     pch=c(16,1)[as.numeric(P.T)])
+curve(5.970*exp(-(2.404)*x),0,90,col='gray37',lwd=1,add = T)
+curve(3.534*exp(-(.149)*x),1,90,col='gray37',add = T)
+curve(4.73*exp(-(.627)*x),0,90,col='black',lwd=2,add = T)
+legend(32,20, c("Control","Treatment"),pch=c(16,1))
+legend(55,20, c("Pred. Mean","97.5% C.I."), lty=c(1,1), lwd=c(2,1),col=c("black","gray37"))
+
+#---------------------------------------Third Model: Density.Seedling.Model----------------
+
+BD.mod<- function() {
+  # Likelihood
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i],tau)  
+    mu[i] <- alpha*exp(-beta1*Stem.D[i])
+  }#prior distributions
+  alpha ~ dunif(-10,10)
+  beta1 ~ dunif(-15,15)
+  tau~dgamma(.01,.01)
+}
+
+sim.dat.jags <- as.list(Finished[,c(5,3)])
+sim.dat.jags$N <- nrow(Finished)
+bayes.mod.inits <- function(){
+  list("alpha" = rexp(1), "beta1" = rexp(1))}
+
+bayes.mod.params <- c("alpha", "beta1")
+
+Seedling.D<- Finished$Seedling.D
+Stem.D <- Finished$Stem.D
+N <- nrow(Finished)
+
+bayes.mod.inits <- function(){
+  list("alpha" = dexp(1), "beta1" = dexp(1))
+}
+
+set.seed(123)
+
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BD.mod)
+
+print(bayes.mod.fit)
+
+#---------------------------------------Plot for Seedling~Stem.D------------------------
+par(mar=c(5,5,1,1))
+plot(Seedling.D~Stem.D,Finished, col=193,
+     xlab=expression("Barberry Stem Dry Mass"),
+     ylab=expression("Native Seedling Density"~~'(1'~m^2~'Plots)'),
+     pch=c(16,1)[as.numeric(P.T)])
+curve(5.952*exp(-(9.933)*x),0,3215,col='gray37',lwd=1,add = T)
+curve(3.438*exp(-(.011)*x),0,3215,col='gray37',add = T)
+curve(4.669*exp(-(1.133)*x),0,3215,col='black',lwd=2,add = T)
+legend(1155,20, c("Control","Treatment"),pch=c(16,1))
+legend(2000,20, c("Pred. Mean","97.5% C.I."), lty=c(1,1), lwd=c(2,1),col=c("black","gray37"))
+graphics.off()
+
+#----------------------------------------Final Bayesian, Species pred.-----------------
+ACRU=filter(Finished.s,Seed.T=="ACRU")
+hist(ACRU$Seedling.D)
+
+Stem.N<- ACRU$Stem.N
+Seedling.D <- ACRU$Seedling.D
+N <- nrow(ACRU)
+
+BCn.mod<- function() {
+  # Likelihood
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i],tau)  
+    mu[i] <- alpha*exp(-beta1*Stem.N[i])
+  }
+  # Prior distributions
+  alpha ~ dunif(0,10)
+  beta1 ~ dunif(0,15)
+  tau~dgamma(.01,.01)
+}
+
+sim.dat.jags <- as.list(ACRU[,c(5,4)])
+sim.dat.jags$N <- nrow(ACRU)
+bayes.mod.inits <- function(){
+  list("alpha" = rexp(1), "beta1" = rexp(1))}
+
+bayes.mod.params <- c("alpha", "beta1")
+
+set.seed(123)
+
+bayes.mod.fit <- jags(sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BCn.mod)
+
+print(bayes.mod.fit)
+
+#Output for Stem.N for ACRU species-------------------------------------------------
+#mu.vect sd.vect    2.5%     25%     50%     75%   97.5%  Rhat n.eff
+#alpha      3.327   0.673   2.013   2.887   3.318   3.759   4.684 1.001  3000
+#beta1      1.975   3.036   0.008   0.215   0.687   2.163  11.956 1.001  3000
+#deviance 236.301   3.949 230.401 233.220 235.613 239.058 244.436 1.001  2400
+
+#----------------------------------ACRU w/stem.d-------------------------------------
+
+BD.mod<- function() {
+  # Likelihood
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i],tau)  
+    mu[i] <- alpha*exp(-beta1*Stem.D[i])
+  }#prior distributions
+  alpha ~ dunif(-10,10)
+  beta1 ~ dunif(-15,15)
+  tau~dgamma(.01,.01)
+}
+
+sim.dat.jags <- as.list(ACRU[,c(6,4)])
+sim.dat.jags$N <- nrow(ACRU)
+bayes.mod.inits <- function(){
+  list("alpha" = rexp(1), "beta1" = rexp(1))}
+
+bayes.mod.params <- c("alpha", "beta1")
+
+Seedling.D<- ACRU$Seedling.D
+Stem.D <- ACRU$Stem.D
+N <- nrow(ACRU)
+
+bayes.mod.inits <- function(){
+  list("alpha" = dexp(1), "beta1" = dexp(1))
+}
+
+set.seed(123)
+
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BD.mod)
+
+print(bayes.mod.fit)
+
+#Outcomes for ACRUw/stem.d------------------------------------------------------
+#mu.vect sd.vect    2.5%     25%     50%     75%   97.5%  Rhat n.eff
+#alpha      3.269   0.720   1.882   2.769   3.270   3.744   4.672 1.001  3000
+#beta1      4.777   4.719   0.002   0.321   3.253   8.729  14.316 1.001  3000
+#deviance 239.432   3.684 231.399 237.513 240.063 241.523 245.979 1.001  2200
+
+
+#-----------------------------------Plot for Stem.N---------------------------------
+plot(Seedling.D~Stem.N,ACRU, col=193,
+     xlab=expression("Barberry Stem Count"),
+     ylab=expression("ACRU Seedling Density"~~'(1'~m^2~'Plots)'),
+     pch=c(16,1)[as.numeric(P.T)])
+curve(3.327*exp(-(1.975)*x),0,52,col='black',lwd=2,add = T)
+legend(30,15, c("Pred. Mean","97.5% C.I."), lty=c(1,1), lwd=c(2,1),col=c("black","gray37"))
+legend(17,15, c("Control","Treatment"),pch=c(16,1))
+
+#-----------------------------------Plot for Stem.D---------------------------------
+plot(Seedling.D~Stem.D,ACRU, col=193,
+     xlab=expression("Barberry Stem Dry Mass"),
+     ylab=expression("ACRU Seedling Density"~~'(1'~m^2~'Plots)'),
+     pch=c(16,1)[as.numeric(P.T)])
+curve(3.269*exp(-(4.777)*x),0,1350,col='black',lwd=2,add = T)
+
+#SAAL Stem.N&Stem.D-----------------------------------------------------------------
+SAAL=filter(Finished.s,Seed.T=="SAAL")
+hist(SAAL$Seedling.D)
+
+Seedling.D<- SAAL$Seedling.D
+Stem.D <- SAAL$Stem.D
+Stem.N <- SAAL$Stem.N
+N <- nrow(SAAL)
+
+
+BCn.mod<- function() {
+  # Likelihood
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i],tau)  
+    mu[i] <- alpha*exp(-beta1*Stem.N[i])
+  }
+  # Prior distributions
+  alpha ~ dunif(0,10)
+  beta1 ~ dunif(0,15)
+  tau~dgamma(.01,.01)
+}
+
+sim.dat.jags <- as.list(SAAL[,c(5,4)])
+sim.dat.jags$N <- nrow(SAAL)
+bayes.mod.inits <- function(){
+  list("alpha" = rexp(1), "beta1" = rexp(1))}
+
+bayes.mod.params <- c("alpha", "beta1")
+
+set.seed(123)
+
+bayes.mod.fit <- jags(sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BCn.mod)
+
+print(bayes.mod.fit)
+
+#Output for Stem.N for ACRU species-------------------------------------------------
+#         mu.vect sd.vect   2.5%    25%    50%     75%   97.5%  Rhat n.eff
+#alpha      1.220   0.143  0.952  1.124  1.215   1.308   1.517 1.001  3000
+#beta1      0.027   0.083  0.000  0.003  0.008   0.016   0.243 1.001  3000
+#deviance 101.128   4.053 96.911 98.298 99.924 102.527 112.563 1.001  3000
+
+#----------------------------------ACRU w/stem.d-------------------------------------
+
+BD.mod<- function() {
+  # Likelihood
+  for(i in 1:N){
+    Seedling.D[i] ~ dnorm(mu[i],tau)  
+    mu[i] <- alpha*exp(-beta1*Stem.D[i])
+  }#prior distributions
+  alpha ~ dunif(-10,10)
+  beta1 ~ dunif(-15,15)
+  tau~dgamma(.01,.01)
+}
+
+sim.dat.jags <- as.list(SAAL[,c(6,4)])
+sim.dat.jags$N <- nrow(SAAL)
+bayes.mod.inits <- function(){
+  list("alpha" = rexp(1), "beta1" = rexp(1))}
+
+bayes.mod.params <- c("alpha", "beta1")
+
+bayes.mod.inits <- function(){
+  list("alpha" = dexp(1), "beta1" = dexp(1))
+}
+
+set.seed(123)
+
+bayes.mod.fit <- jags(data = sim.dat.jags, inits = bayes.mod.inits,
+                      parameters.to.save = bayes.mod.params, n.chains = 3, n.iter = 9000,
+                      n.burnin = 1000, model.file = BD.mod)
+
+print(bayes.mod.fit)
+
+#Outcomes
+#mu.vect sd.vect   2.5%     25%     50%     75%   97.5% Rhat n.eff
+#alpha      1.262   0.192  0.917   1.127   1.248   1.384   1.675 1.01   820
+#beta1      0.637   1.712  0.000   0.000   0.006   0.161   6.467 1.52    11
+#deviance 107.847   8.441 97.051 100.152 107.966 112.539 125.624 1.18    19
+
+#Plots for both stem.n and stem.d------------------------------------------------------
+
+plot(Seedling.D~Stem.N,SAAL, col=193,
+     xlab=expression("Barberry Stem Count"),
+     ylab=expression("SAAL Seedling Density"~~'(1'~m^2~'Plots)'),
+     pch=c(16,1)[as.numeric(P.T)])
+curve(1.220*exp(-(0.027)*x),0,1350,col='black',lwd=2,add = T)
+
+plot(Seedling.D~Stem.D,SAAL, col=193,
+     xlab=expression("Barberry Stem Dry Mass"),
+     ylab=expression("SAAL Seedling Density"~~'(1'~m^2~'Plots)'),
+     pch=c(16,1)[as.numeric(P.T)])
+curve(1.262*exp(-(.637)*x),0,1350,col='black',lwd=2,add = T)
