@@ -1,0 +1,15 @@
+### Detection rate of large mammal individuals per 10km of transect ###,,,,,,
+,,,,,,
+Site,Ateles paniscus,Alouatta macconnelli,Dasyprocta leporina,Cebus olivaceus,Pithecia pithecia,Logging
+K43U,5.77,5.77,77.92,2.89,0,Unlogged
+K43L,34.48,41.38,103.45,13.79,13.79,Logged
+K41U,21.43,71.43,89.29,1.79,0,Unlogged
+K41L,18.46,18.46,40,3.08,0,Logged
+K39U,10.53,39.47,92.11,0,0,Unlogged
+K39L,3.33,33.33,66.67,3.33,0,Logged
+E6U,16.67,62.5,70.83,4.17,0,Unlogged
+E6L,27.78,64.81,46.3,0,0,Logged
+E4U,16.93,5.64,78.98,11.28,0,Unlogged
+E4L,26.04,36.46,83.33,0,0,Logged
+CB,0,6.06,24.24,0,0,Control_before
+CA,16.08,21.44,37.51,0,0,Control_after
