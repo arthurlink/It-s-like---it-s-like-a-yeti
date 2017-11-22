@@ -21,7 +21,7 @@ IR-RG-12C,Lumbricidae,Eisenia,eiseni,A,1
 IR-RG-12C,Lumbricidae,Aporrectodea,,J,1
 IR-RG-12C,Lumbricidae,Dendrobaena,octaedra,J,2
 IR-RG-12C,Acanthodrilidae,Octolasion,,J,1
-IR-RG-12C,Lumbricidae,Aporrectodae,rosea,A,1
+IR-RG-12C,Lumbricidae,Aporrectodea,rosea,A,1
 IR-RB-12I,Acanthodrilidae,Octolasion,tyraeum,A,2
 IR-RB-12I,Lumbricidae,Aporrectodea,rosea,A,4
 IR-RB-12I,Lumbricidae,Eisenia,eiseni,A,1
@@ -41,7 +41,7 @@ LT-KM-21C,Lumbricidae,Dendrodrilus,rubidus,A,2
 LT-KM-21C,Lumbricidae,Eiseniella,tetraedra,A,1
 LT-KM-21I,Lumbricidae,Eiseniella,tetraedra,A,1
 LT-KM-21I,Lumbricidae,Amynthas,,A,1
-LT-KM-21I,Lumbricidae,Aporrectodae,,J,2
+LT-KM-21I,Lumbricidae,Aporrectodea,,J,2
 LT-KM-21I,Lumbricidae,Lumbricus,,J,1
 LT-KM-21I,Lumbricidae,Eisenia,fetida,J,1
 IR-LLB-6I,Lumbricidae,Dendrodrilus,rubidus,A,1
@@ -105,8 +105,8 @@ IR-RG-27I,Lumbricidae,Eisenia,eiseni,A,1
 IR-RG-27I,Lumbricidae,Aporrectodea,,J,1
 IR-RG-27I,Lumbricidae,Amynthas,,A,1
 IR-RG-28C,Lumbricidae,Lumbricus,,J,1
-IR-RG-28C,Lumbricidae,Aporrectodae,,J,1
-IR-RG-28I,Lumbricidae,Aporrectodae,,J,3
+IR-RG-28C,Lumbricidae,Aporrectodea,,J,1
+IR-RG-28I,Lumbricidae,Aporrectodea,,J,3
 IR-RG-28I,Lumbricidae,Octolasion,,J,1
 IR-RG-29C,none,none,,J,0
 IR-RG-29I,Lumbricidae,Amynthas,,J,1
