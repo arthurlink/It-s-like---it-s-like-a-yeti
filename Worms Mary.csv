@@ -19,7 +19,7 @@ LT-KM-22C,none,none,,J,0
 IR-RG-12C,Acanthodrilidae,Octolasian,tyraeum,A,1
 IR-RG-12C,Lumbricidae,Eisenia,eiseni,A,1
 IR-RG-12C,Lumbricidae,Aporrectodea,,J,1
-IR-RG-12C,Lumbricidae,Dendrobaena,octadera,J,2
+IR-RG-12C,Lumbricidae,Dendrobaena,octaedra,J,2
 IR-RG-12C,Acanthodrilidae,Octolasion,,J,1
 IR-RG-12C,Lumbricidae,Aporrectodae,rosea,A,1
 IR-RB-12I,Acanthodrilidae,Octolasion,tyraeum,A,2
@@ -61,7 +61,7 @@ IR-MB-17C,Lumbricidae,Octolasion,,J,2
 IR-MB-17I,Lumbricidae,Aporrectodea,,J,1
 EHC-LLT-3C,Lumbricidae,Amynthas,,A,3
 EHC-LLT-3C,Lumbricidae,Amynthas,,J,1
-EHC-LLT-3C,Lumbricidae,Dendrobaena,octaedra,J,1
+EHC-LLT-3C,Lumbricidae,Dendrobaedra,J,1
 EHC-LLT-3C,Lumbricidae,Aporrectodea,,J,2
 EHC-LLT-3I,Lumbricidae,Aporrectodea,,J,3
 EHC-LLT-3I,Lumbricidae,Octasion,,J,8
