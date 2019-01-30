@@ -1,0 +1,62 @@
+Taxon,Incidence,Type,Native.status
+Dennstaedtia punctilobula,2,fern,native
+Dryopteris carthusiana,3,fern,native
+Dryopteris intermedia,7,fern,native
+Dryopteris spp.,5,fern,native
+Dryopteris triploidea,17,fern,native
+Dryopteris x triploidea,3,fern,native
+Onoclea sensibilis,5,fern,native
+Polystichum acrostichoides,13,fern,native
+Thelypteris noveboracensis,18,fern,native
+Alliaria petiolata,20,forb,invasive
+Asteraceae,6,forb,unknown
+Boehmeria spp.,38,forb,native
+Cardamine hirsuta,2,forb,invasive
+Circaea lutetiana,7,forb,native
+Cirsium spp.,1,forb,unknown
+Cryptotaenia canadensis,1,forb,native
+Dicot,17,forb,unknown
+Epilobium spp.,4,forb,native
+Galium spp.,13,forb,native
+Impatiens spp.,26,forb,native
+Lamiaceae,2,forb,unknown
+Lamium purpureum,1,forb,invasive
+Maianthemum spp.,2,forb,native
+Mitchella repens,2,forb,native
+Monotropa uniflora,1,forb,native
+Oxalis spp.,21,forb,native
+Polygonum spp.,30,forb,unknown
+Ranunculus spp.,4,forb,unknown
+Symplocarpus foetidus,5,forb,native
+Viola spp.,25,forb,native
+Persicaria spp.,25,forb ,invasive
+Phytolacca decandra,3,forb ,native
+Plantago spp.,2,forb ,unknown
+Podophyllum peltatum,1,forb ,native
+Prenanthes spp.,3,forb ,native
+Microstegium vimineum,16,grass,invasive
+Berberis thunbergii,39,shrub,invasive
+Elaeagnus umbellata,3,shrub,invasive
+Ilex spp.,5,shrub,native
+Ligustrum vulgare,32,shrub,invasive
+Lonicera spp.,4,shrub,invasive
+Rosa multiflora,43,shrub,invasive
+Rubus spp.,31,shrub,native
+Vaccinium spp.,2,shrub,native
+Viburnum acerifolium,4,shrub,native
+Acer rubrum,13,tree,native
+Alnus spp.,4,tree,native
+Carya spp.,5,tree,native
+Crataegus spp.,9,tree,native
+Fraxinus spp.,1,tree,native
+Lindera benzoin,46,tree,native
+Liriodendron tulipifera,4,tree,native
+Nyssa sylvatica,4,tree,native
+Prunus serotina,7,tree,native
+Quercus spp.,2,tree,native
+Sassafras albidum,7,tree,native
+Monocot,41,unknown,unknown
+Celastrus orbiculatus,27,vine,invasive
+Parthenocissus quinquefolia,43,vine,native
+Toxicodendron radicans,16,vine,native
+Vitis spp.,23,vine,native
