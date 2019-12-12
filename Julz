@@ -15,48 +15,91 @@ pre.ret=c(10,10,7,3,5,10);post.ret=c(10,10,8,10,7,10)#check the environment, all
 #so data now is there, make into a frame to conduct an analysis
 pre=c(10,8,7,6,5,7,8,5,7,6,6,8,8,10,8,0,6,10,10,3,7,10,7,10,8,8,8,7,7,8,8,7,7,6,7,7,7,9,7,7,7,8,8,7,7,3,8,9,2,7,8,5,5,10,10,10,7,3,5,10)
 post=c(10,10,9,10,8,9,10,10,9,10,8,10,10,10,9,10,8,10,10,10,10,8,10,9,9,10,10,10,9,10,10,10,8,10,7,10,8,10,9,10,8,10,10,10,10,10,9,10,8,7,10,9,7,8,10,10,8,10,7,10)
-  x=data.frame(pre,post)
-  #okay, time to differenciate 
-  type=c(rep('per',6),rep('val',6),rep('int',6),rep('mot',6),rep('att',6),rep('ide',6),rep('exp',6),rep('emo',6),rep('und',6),rep('ret',6))
-  x$type=as.factor(type)
-  
-  #suggest a summary package like rmisc
-  library(Rmisc)
-  p=group.CI(pre~type,x)#from this you can find your greatest and lowest pre-test
-  min(p[3]);max(p[3])#min=und, max=mot
-  pp=group.CI(post~type,x)#again, extract your highest,lowest
-  min(pp[3]);max(pp[3]) #min=und, max=emo
-  
-  # try graphing - I think
-  library(ggplot2)
-  d1=position_dodge(width = 0.8)
-  dd=8
-  
-  g1=ggplot(pp,
-            aes(x=type,y=post.mean,fill=type))+
-    geom_errorbar(aes(ymax=post.upper, ymin=post.lower), 
-                  width=0.2, size=0.5, color="black",position = d1)+
-    geom_point( size=3, shape=21,position=d1)
-  g1
+x=data.frame(pre,post)
+#okay, time to differenciate 
+type=c(rep('per',6),rep('val',6),rep('int',6),rep('mot',6),rep('att',6),rep('ide',6),rep('exp',6),rep('emo',6),rep('und',6),rep('ret',6))
+x$type=as.factor(type)
+
+#suggest a summary package like rmisc
+library(Rmisc)
+p=group.CI(pre~type,x)#from this you can find your greatest and lowest pre-test
+min(p[3]);max(p[3])#min=und, max=mot
+pp=group.CI(post~type,x)#again, extract your highest,lowest
+min(pp[3]);max(pp[3]) #min=und, max=emo
+
+# try graphing - I think
+library(ggplot2)
+d1=position_dodge(width = 0.8)
+dd=8
+
+g1=ggplot(pp,
+          aes(x=type,y=post.mean,fill=type))+
+  geom_errorbar(aes(ymax=post.upper, ymin=post.lower), 
+                width=0.2, size=0.5, color="black",position = d1)+
+  geom_point( size=3, shape=21,position=d1)
+g1
 ### present thoughts... its nice to see your assumed plotted data, but lets find the difference which better shows the effect
-  # going to edit the frame, add a column
+# going to edit the frame, add a column
 
-  #difference between pre-post (what most people care about): assumption of paired samples (check again for data, feel free to reasign values above in lines 2-12)
-  x$diff=x$post-x$pre #this will provide positives (if the treatment is effective - hypothesis/null of zero, correct?)
-  
-  #so try graphing again
-  plot(diff~type,x)#outliers of emo, inf, ref (not too bad though, in my opinion)
-  p1=group.CI(diff~type,x)
+#difference between pre-post (what most people care about): assumption of paired samples (check again for data, feel free to reasign values above in lines 2-12)
+x$diff=x$post-x$pre #this will provide positives (if the treatment is effective - hypothesis/null of zero, correct?)
 
-  g2=ggplot(p1,
-            aes(x=type,y=diff.mean,fill=type))+
-    geom_errorbar(aes(ymax=diff.upper,ymin=diff.lower),
-                  width=0.2,size=0.5,color='black',position=d1)+
-    geom_point( size=3, shape=21,position=d1)+
-    geom_hline(yintercept = 0,linetype='dashed',color='gray')+
-    labs(x='Learning Objective',y=expression('Score effect size,CI 95'),size=dd)+
-    theme(axis.ticks.x=element_blank())+
-    theme_classic()+
-    guides(fill=F)
+#so try graphing again - accounting for assumption
+#test for assumption - seems a little left skewed
+hist(x$diff) #I would run a non-parametric test, but consider the grouping effects too
 
-  g2
+plot(diff~type,x)#outliers of emo, inf, ref (not too bad though, in my opinion)
+#chose not to transform, lose some data
+p1=group.CI(diff~type,x)
+
+g2=ggplot(p1,
+          aes(x=type,y=diff.mean,fill=type))+
+  geom_errorbar(aes(ymax=diff.upper,ymin=diff.lower),
+                width=0.2,size=0.5,color='black',position=d1)+
+  geom_point( size=3, shape=21,position=d1)+
+  geom_hline(yintercept = 0,linetype='dashed',color='gray')+
+  labs(x='Learning Objective',y=expression('Score effect size,CI 95'),size=dd)+
+  theme(axis.ticks.x=element_blank())+
+  theme_classic()+
+  guides(fill=F)
+
+g2+coord_flip()
+
+### I feel like this is going pretty okay.
+
+#my own assumption is that these treatment outcomes are actually indendent tests in the following analysis.
+
+#Test learning type 
+### second sitting: so, I think each learning objective should be tested for significance.
+#First thing first, testing assumption of normality (differences, not data)
+#shapiro.test outcomes, if a < .05, then non-normal
+shapiro.test(x$diff[1:6])#normal
+shapiro.test(x$diff[7:12])#non-normal,val
+shapiro.test(x$diff[13:18])#non-normal,int
+shapiro.test(x$diff[19:24])#normal
+shapiro.test(x$diff[25:30])#normal
+shapiro.test(x$diff[31:36])#normal
+shapiro.test(x$diff[37:42])#normal
+shapiro.test(x$diff[43:48])#normal
+shapiro.test(x$diff[49:54])#normal
+shapiro.test(x$diff[55:60])#non-normal,ret
+###Now analysis: normal=paired t-test, non-normal wilcoxon rank sum - again, difference normality was tested, not pre-post test data
+t.test(x$pre[1:6],x$post[1:6],paired = T)#norm, significant@<=0.05=per
+wilcox.test(x$pre[7:12],x$post[7:12],paired = T)#non-norm, sig@<=0.05=val
+wilcox.test(x$pre[13:18],x$post[13:18],paired = T)#non-norm, NON-sig@.09=int
+t.test(x$pre[19:24],x$post[19:24],paired = T)#norm, NON-sig@.27=mot
+t.test(x$pre[25:30],x$post[25:30],paired = T)#norm, sig@<=0.01=att
+t.test(x$pre[31:36],x$post[31:36],paired = T)#norm, sig@<=0.02=ide
+t.test(x$pre[37:42],x$post[37:42],paired = T)#norm, sig@<=0.01=exp
+t.test(x$pre[43:48],x$post[43:48],paired = T)#norm, sig@<=0.05=emo
+t.test(x$pre[49:54],x$post[49:54],paired = T)#norm, NON-sig@.14=und
+wilcox.test(x$pre[55:60],x$post[55:60],paired = T)#non-normal,NON-sig@.18=ret
+
+###Okay, lets see if I can get something out of the groups = predictability power of some sort, trying to relate to your original question of which is greater or less
+#I think focusing on the differences will help your argument, if you think differently, feel free to intervene
+#thinking a repeated anova,ancova, or mixed model.
+#pre-post, controlling for pre...this is change between
+ancov=aov(post~pre+type,x)
+summary(ancov) #there is no significant difference between learning outcomes...
+
+#so, in sense of your comments, there really is no way to say there is a greater or lesser impact between outcomes (both pre/post)
