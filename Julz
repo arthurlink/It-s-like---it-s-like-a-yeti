@@ -1,7 +1,7 @@
 ### A.Link 12.11 - Julz code for pre-post analysis
 #I was watching the judiciary committee debate on the articles of impeachments while writing this, pardon if I have jumps in thought or seem inconsistent
 pre.per=c(10,8,7,6,5,7);sum(pre.per);post.per=c(10,10,9,10,8,9);sum(post.per)
-mean(pre.per)#so this allows you to see your average, feel free to do that to each after.
+mean(pre.per);mean(post.per)#so this allows you to see your average, feel free to do that to each after.
 pre.val=c(8,5,7,6,6,8);post.val=c(10,10,9,10,8,10)
 pre.int=c(8,10,8,0,6,10);post.int=c(10,10,9,10,8,10)
 pre.mot=c(10,3,7,10,7,10);post.mot=c(10,10,10,8,10,9)
@@ -107,12 +107,17 @@ summary(ancov) #there is no significant difference between learning outcomes...
 ###Answers to Julz' boss (12.13):
 #Run code in program R
 
+#Descriptive stats (most basic overview of data outcomes): 
+#pre values ranked + highest/- lowest, based in total or mean: 1) motivation, 2) attitudes, 3-4, tied) experience/retention, 5) perception, 6-8, tied) interest/identity/emotion, 9) values, 10) understanding
+#post values ranked: 1) emotion, 2-4, tied) values/interests/attitudes, 5) motivation, 6) perception, 7-9, tied) identity/interest/retention, 10) understanding
 
-
-#The following 6 teaching outcomes were significant; i.e., a positive effect due to treatment (produced a figure that shows this): [ranked from greater-lower mean difference] 1) values, 2) emotions, 3) perceptions, 4) identity, 5) attitude, and 6) experience.
-#The following 4 outcomes were not met nor significant; i.e. a neutral effect due to treatment: [ranked similarly as before] 1) interest, 2) understanding, 3) retention, and 4) motivation.
+#First analysis - whether or not treatment was effective and for what type of teaching outcome:
+#The following 6 teaching outcomes were significantly different when comparing pre-post scores; i.e., a positive effect due to treatment (produced a figure that shows this): 
+#[ranked from greater-lower mean difference] 1) values, 2) emotions, 3) perceptions, 4) identity, 5) attitude, and 6) experience.
+#The following 4 outcomes were not met nor significant; i.e. a neutral effect due to treatment: 
+#[ranked similarly as before] 1) interest, 2) understanding, 3) retention, and 4) motivation.
 #These were validated by executing [parametric] paired t-tests and [non-parametric] wilcoxon rank-sum tests. Pre-post data difference was tested for normality through Shapiro-Wilk analyses. 
 
-#Given that the data was generally uniform among responses/effects (shown my positive mean differences, similar data spreads), there was no significant differences between teaching objective outcomes.
-#Thus, there is no highest*lowest/pre-post interactions able to be explained. The design proposed limited the potential to pose this hypothesis.
-#But, this can be validated by executing an ANCOVA which accounts for predicting post-test response while considering the learning type and [underlying effect] of post-scores
+#Given that the data was generally uniform among responses/effects (shown my positive mean differences, similar data spreads), there was not significant differences between any of the teaching outcomes.
+#Thus, there is no highest*lowest/pre-post interactions able to be explained. The design proposed likely limited the potential to pose this hypothesis.
+#But, this can be validated by executing an ANCOVA which accounts for predicting post-test response while considering the learning type and [underlying effect] of post-scores.
